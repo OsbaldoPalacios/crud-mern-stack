@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
+require('dotenv').config();
 
-mongoose.connect('mongodb://localhost:27017/crud');
+mongoose.connect(process.env.MONGO_URI);
 
 const objetobd = mongoose.connection;
 
