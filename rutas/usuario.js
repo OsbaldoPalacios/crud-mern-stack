@@ -31,3 +31,13 @@ router.post('/agregarusuario', (req,res) => {
             console.log(err)
         })
 })
+
+router.get('/obtenerusuarios', (req, res) => {
+    ModeloUsuario.find()
+    .then(docs => {
+        res.send(docs)
+    })
+    .catch(err => {
+        res.send(err)
+    })
+})
