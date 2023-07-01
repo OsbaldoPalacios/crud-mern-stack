@@ -25,7 +25,7 @@ router.post('/agregarusuario', (req,res) => {
     })
     nuevousuario.save()
         .then(doc => {
-            console.log(doc)
+            res.send("Creado")
         })
         .catch(err => {
             console.log(err)

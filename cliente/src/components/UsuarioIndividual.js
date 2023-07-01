@@ -1,15 +1,23 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {Link, useNavigate} from 'react-router-dom';
 import axios from 'axios';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
+import Swal from 'sweetalert2';
 
 function UsuarioIndividual({usuario}){
 
     const navegar = useNavigate();
 
+    //Para animación de scroll al bajar
+    useEffect(() => {
+        AOS.init()
+    },[])
+
     const borrarusuario = (iduasuario) => {
         axios.post('/api/usuario/borrarusuario', {idusuario: iduasuario})
         .then(res => {
-            alert(res.data)
+            Swal.fire('Bien', "El usuario se eliminó con exito")
             navegar(0)
         })
         .catch(err => {
@@ -22,7 +30,7 @@ function UsuarioIndividual({usuario}){
         <div className="container">
             <div className='row'>
 
-                <div className='col-sm-6 offset-3'>
+                <div className='col-sm-6 offset-3' data-aos="flip-right">
                     <ul className='list-group'>
                         <li className="list-group-item">{usuario.idusuario}</li>
                         <li className="list-group-item">{usuario.nombre}</li>

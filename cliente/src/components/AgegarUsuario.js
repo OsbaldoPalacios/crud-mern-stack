@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import uniquid from 'uniqid';
 import axios from 'axios';
+import Swal from 'sweetalert2';
 
 function AgregarUsuario(){
 
@@ -8,6 +9,8 @@ function AgregarUsuario(){
     const [nombre, setNombre] = useState('');
     const [email, setEmail] = useState('');
     const [telefono, setTelefono] = useState('');
+
+    //const navegar = useNavigate();
 
     function agregarUsuario(){
         var usuario = {
@@ -20,7 +23,7 @@ function AgregarUsuario(){
         
         axios.post('/api/usuario/agregarusuario', usuario)
         .then(res => {
-            alert(res.data)
+            Swal.fire('Bien', "El usuario se creó con exito")
         })
         .then(err => {console.log(err)})
         

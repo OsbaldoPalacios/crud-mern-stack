@@ -1,6 +1,8 @@
 import React, {useEffect, useState} from 'react';
 import { useParams } from 'react-router';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import Swal from 'sweetalert2';
 
 function EditarUsuario(){
 
@@ -12,6 +14,8 @@ function EditarUsuario(){
     const [email, setEmail] = useState('');
     const [telefono, setTelefono] = useState('');
 
+    const navegar = useNavigate();
+
     useEffect(() => {
         axios.post('/api/usuario/obtenerdatausuario', {idusuario: params.idusuario})
         .then(res => {
@@ -20,6 +24,7 @@ function EditarUsuario(){
             setNombre(datausuario.nombre)
             setEmail(datausuario.email)
             setTelefono(datausuario.telefono)
+            
         })
     },[])
 
@@ -36,7 +41,8 @@ function EditarUsuario(){
         axios.post('/api/usuario/actualizausuario', actualizarusuario)
         .then(res => {
             console.log(res.data)
-            alert(res.data)
+            Swal.fire('Bien', 'Usuario actualizado con exito')
+            navegar('/')
         })
         .then(err => {console.log(err)})
     }
